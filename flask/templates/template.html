@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DHS Souvenirs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+          <a class="brand" href="/">DHS Souvenir Store</a>
+          <ul class="nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/cart">My Cart</a></li>
+			{% if logged %}
+			<li><a href="/logout">Logout</a></li>
+			{% else %}
+			<li><a href="/login">Login</a></li>
+			{% endif %}
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

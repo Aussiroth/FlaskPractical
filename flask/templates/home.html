@@ -1,0 +1,47 @@
+{% extends "template.html" %}
+{% block content %}
+    <h2>Welcome to the DHS Souvenir Store!</h2>
+	<h3>Catalog:</h3>
+   <form method = "post" action = "/order">
+   A4 Lecture Pad  <input type = "text" name = "value">
+   <input type = "submit" value = "submit">
+   </form>
+   <form method = "post" action = "/order?item=stickynote">
+   7-colour sticky note with pen <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=exercisebook">
+   A5 exercise book  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=notebook">
+   A5 note book with zip bag  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=pencil">
+   2B pencil  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=tumbler">
+   Stainless steel tumbler  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=clearholder">
+   A4 clear holder  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=vanguard">
+   A4 vanguard file  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=nameholder">
+   Name card holder  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=umbrella">
+   Umbrella  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=jhbadge">
+   School badge (Junior High)  <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=shbadge">
+   School badge (Senior High) <input type = "number" name = "value">
+   </form>
+   <form method = "post" action = "/order?item=dolls">
+   Dunman dolls (pair)  <input type = "number" name = "value">
+   </form>
+    <br />
+    <br />
+{% endblock %}
