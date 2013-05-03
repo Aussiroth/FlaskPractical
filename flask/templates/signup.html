@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block content %}
+
+	<p> Fill in the following information and you can start purchasing! </p>
+	{%for message in error%}
+	<p>{{message}}</p>
+	{% endfor %}
+	<form action = "" method=post>
+		<dl>
+		  <dt>Username:
+		  <dd><input type=text name=username value="{{username }}">
+		  <dt>Password:
+		  <dd><input type=password name=password1 value = "{{password}}">
+		  <dt>Password:
+		  <dd><input type=password name=password2 value = "{{password}}">
+		  <dt>Email:
+		  <dd><input type=text name=email value = "{{email}}">
+		</dl>
+		<input type = "submit" value = "Sign Up!">
+	</form>
+	
+{% endblock %}

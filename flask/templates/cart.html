@@ -1,6 +1,9 @@
 {% extends "template.html" %}
 {% block content %}
-    <h2>This is my cart. Derp</h2>
+    <h2>Current Orders</h2>
+	{% for order in currorder %}
+	<p> {{order}} </p>
+	{% endfor %}
     <br />
     <br />
 {% endblock %}

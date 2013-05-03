@@ -1,4 +1,9 @@
 {% extends "template.html" %}
 {% block content %}
-<p>{{item}}  LOL  {{number}}
+	<p>Testing order infomation.
+	{{loggeduser}}
+	{% for name in names %}
+		<p>{{name}}</p>
+	{% endfor %}
+	</p>
 {% endblock %}

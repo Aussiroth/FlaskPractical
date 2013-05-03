@@ -2,46 +2,61 @@
 {% block content %}
     <h2>Welcome to the DHS Souvenir Store!</h2>
 	<h3>Catalog:</h3>
-   <form method = "post" action = "/order">
-   A4 Lecture Pad  <input type = "text" name = "value">
-   <input type = "submit" value = "submit">
-   </form>
-   <form method = "post" action = "/order?item=stickynote">
-   7-colour sticky note with pen <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=exercisebook">
-   A5 exercise book  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=notebook">
-   A5 note book with zip bag  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=pencil">
-   2B pencil  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=tumbler">
-   Stainless steel tumbler  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=clearholder">
-   A4 clear holder  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=vanguard">
-   A4 vanguard file  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=nameholder">
-   Name card holder  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=umbrella">
-   Umbrella  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=jhbadge">
-   School badge (Junior High)  <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=shbadge">
-   School badge (Senior High) <input type = "number" name = "value">
-   </form>
-   <form method = "post" action = "/order?item=dolls">
-   Dunman dolls (pair)  <input type = "number" name = "value">
-   </form>
-    <br />
-    <br />
+	<form method = "post" action = "/order">
+	<div>
+		A4 Lecture Pad, insert pics for the items
+		<input type = "number" name = "item1" value = 0>
+	</div>
+	<div>
+		7-colour sticky note with pen 
+		<input type = "number" name = "item2" value = 0>
+	</div>
+	<div>
+		A5 exercise book
+		<input type = "number" name = "item3" value = 0>
+	</div>
+	<div>
+		A5 note book with zip bag  
+		<input type = "number" name = "item4" value = 0>
+	</div>
+	<div>
+		2B pencil  
+		<input type = "number" name = "item5" value = 0>
+	</div>
+	<div>
+		Stainless steel tumbler
+		<input type = "number" name = "item6" value = 0>
+	</div>
+	<div>
+		A4 clear holder  
+		<input type = "number" name = "item7" value = 0>
+	</div>
+	<div>
+		A4 vanguard file  
+		<input type = "number" name = "item8" value = 0>
+	</div>
+	<div>
+		Name card holder  
+		<input type = "number" name = "item9" value = 0>
+	</div>
+	<div>
+		Umbrella  
+		<input type = "number" name = "item10" value = 0>
+	</div>
+	<div>
+		School badge (Junior High)  
+		<input type = "number" name = "item11" value = 0>
+	</div>
+	<div>
+		School badge (Senior High) 
+		<input type = "number" name = "item12" value = 0>
+	</div>
+	<div>
+		Dunman dolls (pair)  
+		<input type = "number" name = "item13" value = 0>
+	</div>
+	<input type = "submit" value = "submit">
+	</form>
+	<br />
+	<br />
 {% endblock %}

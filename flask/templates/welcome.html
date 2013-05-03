@@ -1,5 +1,10 @@
 {% extends "template.html" %}
 {% block content %}
+	{% for message in get_flashed_messages() %}
+	<div class=flash>
+		{{ message }}
+	</div>
+	{% endfor %}
     <h2>Welcome to the DHS Souvenir Store!</h2>
     <h2>Enjoy your shopping!</h2>
 {% endblock %}

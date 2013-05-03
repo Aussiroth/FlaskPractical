@@ -1,25 +1,14 @@
 import sqlite3 as lite
 import sys
-item = (
-	('A4 lecture pad', 2.60),
-	('7-colour sticky note with pen', 4.20),
-	('A5 ring book', 4.80),
-	('A5 note book with zip bag', 4.60),
-	('2B pencil', 0.90),
-	('Stainless steel tumbler', 12.90),
-	('A4 clear holder', 4.40),
-	('A4 vanguard file', 1.00),
-	('Name card holder', 10.90),
-	('Umbrella', 9.00),
-	('School badge (Junior High)', 1.30),
-	('School badge (Senior High)', 1.80),
-	('Dunman dolls (pair)', 45.00)	
-)
 
 con = lite.connect('shop.db')
 
 with con:
 	cur = con.cursor()
-	
-	cur.execute("CREATE TABLE person (name text, lecturepad text")
-	cur.executemany("INSERT INTO items VALUES (?, ?)", item)
+	#cur.execute("DROP TABLE IF EXISTS orders")
+	#cur.execute("DROP TABLE IF EXISTS users")
+	#cur.execute("CREATE TABLE users(username text, password text, email text)")
+	#cur.execute("INSERT INTO users VALUES ('admin', 'admin', 'leow.justin@dhs.sg')")
+	#cur.execute("INSERT INTO users VALUES ('Aussiroth', 'WhiteDragon', 'yan.hongyao.alvin@dhs.sg')")
+	#cur.execute("CREATE TABLE orders (name text, lecture number, stickynote number, exercisebook number, notebook number, pencil number, tumbler number, clearholder number, vanguard number, cardholder number, umbrella number, jhbadge number, shbadge number, dolls number)")
+	#cur.execute("INSERT INTO orders VALUES ('admin', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)")
