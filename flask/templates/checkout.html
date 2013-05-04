@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+{% block content %}
+	<p>Here is the order you have checked out.</p>
+	<!-- Table here is the same as in the cart... -->
+	
+	{% for row in currorder %}
+	<p> 
+		Item: {{row[0]}} | Quantity: {{row[1]}} | Price each: {{row[2]}} | Total Price for this item: {{row[3]}}
+	</p>
+	{% endfor %}
+	<p> The total cost of the items is: ${{totalcost}} </p>
+	
+	<p>Please come down to the store 3 days after the checkout to collect your items and pay for them. </p>
+	
+	<p> A copy of the invoice has been emailed to you. </p>
+	<p>You can print it out from there and bring it down to the shop to pay and collect the items.</p>
+	
+	
+{% endblock %}

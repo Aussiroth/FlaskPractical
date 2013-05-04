@@ -1,10 +1,11 @@
 {% extends "template.html" %}
 {% block content %}
     <h2>Welcome to the DHS Souvenir Store!</h2>
+	<p> {{error}}</p>
 	<h3>Catalog:</h3>
-	<form method = "post" action = "/order">
+	<form method = "post" action = "">
 	<div>
-		A4 Lecture Pad, insert pics for the items
+		A4 Lecture Pad (Table columns name, picture, price, form entry)
 		<input type = "number" name = "item1" value = 0>
 	</div>
 	<div>

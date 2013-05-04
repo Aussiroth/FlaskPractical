@@ -3,8 +3,12 @@ import sys
 
 con = lite.connect('shop.db')
 
+foo = "dummy"
+
 with con:
 	cur = con.cursor()
+	#cur.execute("DROP TABLE IF EXISTS prices")
+	#cur.execute("CREATE TABLE prices (price float)")
 	#cur.execute("DROP TABLE IF EXISTS orders")
 	#cur.execute("DROP TABLE IF EXISTS users")
 	#cur.execute("CREATE TABLE users(username text, password text, email text)")
@@ -12,3 +16,4 @@ with con:
 	#cur.execute("INSERT INTO users VALUES ('Aussiroth', 'WhiteDragon', 'yan.hongyao.alvin@dhs.sg')")
 	#cur.execute("CREATE TABLE orders (name text, lecture number, stickynote number, exercisebook number, notebook number, pencil number, tumbler number, clearholder number, vanguard number, cardholder number, umbrella number, jhbadge number, shbadge number, dolls number)")
 	#cur.execute("INSERT INTO orders VALUES ('admin', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)")
+	#cur.execute("CREATE TABLE confirm (name text, lecture number, stickynote number, exercisebook number, notebook number, pencil number, tumbler number, clearholder number, vanguard number, cardholder number, umbrella number, jhbadge number, shbadge number, dolls number)")

@@ -1,9 +1,24 @@
 {% extends "template.html" %}
 {% block content %}
-    <h2>Current Orders</h2>
-	{% for order in currorder %}
-	<p> {{order}} </p>
+	{% for message in get_flashed_messages() %}
+		<p>{{message}}</p>
 	{% endfor %}
+	
+	{% if order %}
+		<h2>Current Orders</h2>
+	<!-- Table here is Item name, quantity, price per item, total price -->
+	
+	{% for row in currorder %}
+	<p> 
+		Item: {{row[0]}} | Quantity: {{row[1]}} | Price each: {{row[2]}} | Total Price for this item: {{row[3]}}
+	</p>
+	{% endfor %}
+	
+	<p> The total cost of the items is: ${{totalcost}} </p>
+	
     <br />
     <br />
+		<a href = "/delete"> Delete current order </a><br />
+		<p> Satisfied with your current order? <a href = "/checkout"> Checkout </a> </p>
+	{% endif %}
 {% endblock %}
