@@ -10,17 +10,11 @@ mail = Mail(app)
 
 app.secret_key = ('GreatWhiteBlueRedBlackGreenDragonsAreSoMuchCoolerThanTheStupidHouseDrakon')
 
-DATABASE = '/home/Aussiroth/mysite/shop.db'
-#DATABASE = 'shop.db'
+#DATABASE = '/home/Aussiroth/mysite/shop.db'
+DATABASE = 'shop.db'
 
 app.config.from_object(__name__)
 
-#MAIL_SERVER = 'smtp.googlemail.com'
-#MAIL_PORT = 465
-#MAIL_USE_TLS = False
-#MAIL_USE_SSL = True
-#MAIL_USERNAME = 'laserbeam.arbiter@gmail.com'
-#MAIL_PASSWORD = 'DHSSouvenirs'
 
 app.config.update(
 	DEBUG=True,
