@@ -3,19 +3,27 @@
 	{% for message in get_flashed_messages() %}
 		<p>{{message}}</p>
 	{% endfor %}
-	
+
 	{% if order %}
 		<h2>Current Orders</h2>
+        <table>
 	<!-- Table here is Item name, quantity, price per item, total price -->
-	
+    <tr class="header_table">
+        <td>Item</td>
+        <td>Quantity</td>
+        <td>Price of item</td>
+        <td>Total price</td>
+    </tr>
 	{% for row in currorder %}
-	<p> 
-		Item: {{row[0]}} | Quantity: {{row[1]}} | Price each: {{row[2]}} | Total Price for this item: {{row[3]}}
-	</p>
+	<tr>
+		<td>{{row[0]}}</td> <td>{{row[1]}}</td> <td>{{row[2]}}</td> <td>{{row[3]}}</td>
+	</tr>
 	{% endfor %}
-	
-	<p> The total cost of the items is: ${{totalcost}} </p>
-	
+	</table>
+    <br/>
+    <br/>
+	<h3>The total cost of the items is: ${{totalcost}}</h3>
+	<p>{{warning}}</p>
     <br />
     <br />
 		<a href = "/delete"> Delete current order </a><br />

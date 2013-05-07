@@ -16,4 +16,5 @@ with con:
 	#cur.execute("INSERT INTO users VALUES ('Aussiroth', 'WhiteDragon', 'yan.hongyao.alvin@dhs.sg')")
 	#cur.execute("CREATE TABLE orders (name text, lecture number, stickynote number, exercisebook number, notebook number, pencil number, tumbler number, clearholder number, vanguard number, cardholder number, umbrella number, jhbadge number, shbadge number, dolls number)")
 	#cur.execute("INSERT INTO orders VALUES ('admin', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)")
-	#cur.execute("CREATE TABLE confirm (name text, lecture number, stickynote number, exercisebook number, notebook number, pencil number, tumbler number, clearholder number, vanguard number, cardholder number, umbrella number, jhbadge number, shbadge number, dolls number)")
+	#cur.execute("DROP TABLE IF EXISTS confirm")
+	#cur.execute("CREATE TABLE confirm (name text, lecture number, stickynote number, exercisebook number, notebook number, pencil number, tumbler number, clearholder number, vanguard number, cardholder number, umbrella number, jhbadge number, shbadge number, dolls number, date text)")

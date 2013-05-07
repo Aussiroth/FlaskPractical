@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+{% block content %}
+
+	{% for message in get_flashed_messages() %}
+		<p>{{message}}</p>
+	{% endfor %}
+
+	<p>Welcome to your profile page, {{username}}</p>
+	
+	<p><a href = "/changeuser">Change your username</a></p>
+	<p><a href = "/changepass">Change your password</a></p>
+	<p><a href = "/changeemail">Change your email</a></p>
+	<p><a href = "/invoice">Check your past purchases</a></p>
+	
+	
+{% endblock %}

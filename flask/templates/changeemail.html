@@ -1,0 +1,11 @@
+{% extends "template.html" %}
+{% block content %}
+	<p class = error>{{error}}</p>
+	<form action = "" method=post>
+		<dl>
+		  <dt>Enter new email:
+		  <dd><input type=text name=email>
+		</dl>
+		<input type=submit value="Change email!">
+	</form>
+{% endblock %}

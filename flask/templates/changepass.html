@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+{% block content %}
+	<p class = error>{{error}}</p>
+	<p>{{password1}} {{password2}}</p>
+	<form action = "" method=post>
+		<dl>
+			<dt>Current Password:
+			<dd><input type=password name=currpass>
+		    <dt>New password:
+		    <dd><input type=password name=password1>
+		    <dt>Re-type new password:
+		    <dd><input type=password name=password2>
+		</dl>
+		<input type=submit value="Change password!">
+	</form>
+{% endblock %}

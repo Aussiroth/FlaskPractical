@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block content %}
+	{% if gotorder %}
+		{% for order in allorder %}
+			<p>Timestamp of invoice: {{ order[0] }}</p>
+			<table>
+			<tr class="header_table">
+				<td>Item</td>
+				<td>Quantity</td>
+				<td>Price of item</td>
+				<td>Total price</td>
+			</tr>
+			{% for row in order[1:] %}
+			<tr>
+				<td>{{row[0]}}</td> <td>{{row[1]}}</td> <td>${{row[2]}}</td> <td>${{row[3]}}</td>
+			</tr>
+			{% endfor %}
+			</table>
+			</br ><br />
+		{% endfor %}
+	{% else %}
+		<p>You do not have any purchase history!</p>
+	{% endif %}
+{% endblock %}
