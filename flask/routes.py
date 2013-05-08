@@ -3,6 +3,7 @@ from functools import wraps
 import sqlite3
 from flask.ext.mail import *
 import datetime
+import hashlib
 
 app = Flask(__name__)
 
@@ -18,16 +19,9 @@ app.config.from_object(__name__)
 
 app.config.update(
 	DEBUG=True,
-	#EMAIL SETTINGS
-	MAIL_SERVER='smtp.gmail.com',
-	MAIL_PORT=465,
-	MAIL_USE_TLS=False,
-	MAIL_USE_SSL=True,
-	MAIL_USERNAME = 'laserbeam.arbiter@google.com',
-	MAIL_PASSWORD = 'DHSSouvenirs',
-	DEFAULT_MAIL_SENDER = 'laserbeam.arbiter@google.com'
+	#Email does not work, so settings removed for now.
 	)
-#send email function, not yet working
+#send email function, not yet working, error 111.
 def send_email(subject, sender, recipients, text_body, html_body):
     msg = Message(subject, sender = "you@dgoogle.com", recipients = recipients)
     msg.body = text_body
@@ -46,12 +40,6 @@ def login_required(test):
             flash('Please login to access the site.')
             return redirect(url_for('login'))
     return wrap 
-
-def check_logged_in():
-	if 'username' in session:
-		return True
-	else:
-		return False
 	
 #function to format order for cart, checkout, invoice history
 def format_order(currorder, format_order, prices):
@@ -128,7 +116,9 @@ def home():
 		g.db = connect_db()
 		cur = g.db.execute('select name from orders')
 		names = [row[0] for row in cur.fetchall()]
+		#check if there is current order in cart
 		if logged_user in names:
+			#if have, take existing values, add together
 			cur = g.db.execute('select * from orders where name="'+logged_user+'"')
 			currnumber = [[row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13]] for row in cur.fetchall()]
 			g.db.execute('delete from orders where name="'+logged_user+'"')
@@ -137,24 +127,16 @@ def home():
 		g.db.execute('insert into orders (name, lecture, stickynote, exercisebook, notebook, pencil, tumbler, clearholder, vanguard, cardholder, umbrella, jhbadge, shbadge, dolls) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [logged_user, number[0], number[1], number[2], number[3], number[4], number[5], number[6], number[7], number[8], number[9], number[10], number[11], number[12]])
 		g.db.commit()
 		flash("Successfully placed your order!")
+		#directs to cart to see the current order
 		return redirect(url_for('cart'))
 	else:
 		return render_template('home.html', logged = True)
-
-@app.route('/logout')
-def logout():
-    session.pop('username', None)
-    flash('You were logged out')
-    return redirect(url_for('login'))
 	
 @app.route('/welcome')
 def welcome():
-	if check_logged_in():
-		return render_template('welcome.html', logged = True)
-	else:
-		return render_template('welcome.html', logged = False)
+	return render_template('welcome.html', logged = True)
 
-
+#login/logout/create user functions
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	error = None
@@ -169,18 +151,26 @@ def login():
 		for user in users:
 			if user[0]==curruser:
 				found = True
-				if user[1]==currpass:
+				hash = hashlib.sha1()
+				hash.update(currpass)
+				if user[1]==hash.hexdigest():
 					session['username'] = curruser
 					return redirect(url_for('welcome'))
 				else:
 					error = "You entered the wrong password."
 		if not found:
 			error = "You entered a wrong username."
-	if check_logged_in():
+	if 'username' in session:
 		return render_template('log.html', error=error, logged = True)
 	else:
 		return render_template('log.html', error=error, logged = False)
 
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    flash('You were logged out')
+    return redirect(url_for('login'))
+		
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
 	error = []
@@ -242,7 +232,9 @@ def signup():
 			
 		if correct==True:
 			session['username'] = curruser
-			g.db.execute('insert into users (username, password, email) values (?, ?, ?)', [curruser, password1, curremail])
+			hash = hashlib.sha1()
+			hash.update(password1)
+			g.db.execute('insert into users (username, password, email) values (?, ?, ?)', [curruser, hash.hexdigest(), curremail])
 			g.db.commit()
 			flash('Thanks for signing up!')
 			return redirect(url_for('welcome'))
@@ -282,6 +274,16 @@ def cart():
 		flash("You have no items in your cart! Head to the homepage to buy some items!")
 		return render_template('cart.html', logged = True, order = False)
 	
+@app.route('/delete')
+@login_required
+def delete():
+	logged_user = session['username']
+	g.db = connect_db()
+	g.db.execute('delete from orders where name="'+logged_user+'"')
+	g.db.commit()
+	flash("Successfully deleted your current order.")
+	return redirect(url_for('cart'))
+	
 @app.route('/checkout')
 @login_required
 def checkout():
@@ -305,11 +307,10 @@ def checkout():
 	if gotorder:
 		fullorder = []
 		fullorder, totalcost, temp = format_order(currorder, fullorder, prices)
-		#send_email("Your DHS Souvenir Store invoice %s" %logged_user, email[0], email[0], 'Testing', '<p>Testing</p>')
 		#delete from carts
 		g.db.execute('delete from orders where name="'+logged_user+'"')
 		g.db.commit()
-		#date
+		#get current date and time of invoice and date to collect.
 		currdate = datetime.datetime.today()
 		logged_date = currdate.strftime("%d %B %Y, %H:%M")
 		collectdate = currdate + datetime.timedelta(days=5)
@@ -318,19 +319,12 @@ def checkout():
 		g.db.execute('insert into confirm (name, lecture, stickynote, exercisebook, notebook, pencil, tumbler, clearholder, vanguard, cardholder, umbrella, jhbadge, shbadge, dolls, date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [currorder[0], currorder[1], currorder[2], currorder[3], currorder[4], currorder[5], currorder[6], currorder[7], currorder[8], currorder[9], currorder[10], currorder[11],currorder[12], currorder[13], logged_date])
 		g.db.commit()
 		return render_template('checkout.html', currorder = fullorder, logged = True, totalcost = totalcost, date=logged_date, collectdate = collectdate)
+	#check in case no order and accidentally stumble upon the page.
 	else:
 		flash("You can't checkout if you have no items!")
 		return redirect(url_for('cart'))
 		
-@app.route('/delete')
-@login_required
-def delete():
-	logged_user = session['username']
-	g.db = connect_db()
-	g.db.execute('delete from orders where name="'+logged_user+'"')
-	g.db.commit()
-	flash("Successfully deleted your current order.")
-	return redirect(url_for('cart'))
+
 	
 #profile user stuff
 
@@ -363,11 +357,9 @@ def changeuser():
 				curruser = ""
 				correct = False
 		if correct:
-			cur = g.db.execute('select * from users where username="'+logged_user+'"')
-			info = [[row[0], row[1], row[2]] for row in cur.fetchall()]
-			info[0][0] = curruser
-			g.db.execute('delete from users where username="'+logged_user+'"')
-			g.db.execute('insert into users (username, password, email) values (?, ?, ?)', [info[0][0], info[0][1], info[0][2]])
+			g.db.execute('update users set username="'+curruser+'" where username="'+logged_user+'"') 
+			g.db.execute('update orders set name="'+curruser+'" where name="'+logged_user+'"')
+			g.db.execute('update confirm set name="'+curruser+'" where name="'+logged_user+'"')
 			g.db.commit()
 			flash("Successfully changed your username.")
 			session['username'] = curruser
@@ -398,24 +390,24 @@ def changepass():
 			correct = False
 		else:
 		#VALIDATE IF PASSWORD IS CORRECT
+			hash1 = hashlib.sha1()
+			hash1.update(currpass)
 			g.db = connect_db()
 			cur = g.db.execute('select username, password from users')
 			users = [[row[0], row[1]] for row in cur.fetchall()]
 			for user in users:
 				if user[0]==logged_user:
-					if user[1]!=currpass:
+					if user[1]!=hash1.hexdigest():
 						error = "You did not type your current password correctly. Please try again."
 						correct = False
 		if correct:
-			cur = g.db.execute('select * from users where username="'+logged_user+'"')
-			info = [[row[0], row[1], row[2]] for row in cur.fetchall()]
-			info[0][1] = password1
-			g.db.execute('delete from users where username="'+logged_user+'"')
-			g.db.execute('insert into users (username, password, email) values (?, ?, ?)', [info[0][0], info[0][1], info[0][2]])
+			hash2 = hashlib.sha1()
+			hash2.update(password1)
+			g.db.execute('update users set password="'+hash2.hexdigest()+'" where password="'+hash1.hexdigest()+'"')
 			g.db.commit()
 			flash("Successfully changed your password.")
 			return redirect(url_for('profile'))
-	return render_template('changepass.html', error = error, logged = True, password1=password1, password2 = password2)
+	return render_template('changepass.html', error = error, logged = True, password1=password1)
 	
 @app.route('/changeemail', methods = ['GET', 'POST'])
 @login_required
