@@ -44,31 +44,31 @@ def login_required(test):
 #function to format order for cart, checkout, invoice history
 def format_order(currorder, format_order, prices):
 	if currorder[1]>0:
-		format_order.append(['A4 Lecture Pad', currorder[1], "{0:<.2f}".format(prices[0]), "{0:<.2f}".format(int(currorder[1])*prices[0])])
+		format_order.append(['A4 Lecture Pad', currorder[1], "{0:<.2f}".format(prices[0]), "{0:<.2f}".format(int(currorder[1])*2.6)])
 	if currorder[2]>0:
-		format_order.append(['7-colour sticky note with pen', currorder[2], "{0:<.2f}".format(prices[1]), "{0:<.2f}".format(int(currorder[2])*prices[1])])
+		format_order.append(['7-colour sticky note with pen', currorder[2], "{0:<.2f}".format(prices[1]), "{0:<.2f}".format(int(currorder[2])*4.2)])
 	if currorder[3]>0:
-		format_order.append(['A5 exercise book', currorder[3], "{0:<.2f}".format(prices[2]), "{0:<.2f}".format(int(currorder[3])*prices[2])])
+		format_order.append(['A5 exercise book', currorder[3], "{0:<.2f}".format(prices[2]), "{0:<.2f}".format(int(currorder[3])*2.9)])
 	if currorder[4]>0:
-		format_order.append(['A5 note book with zip bag', currorder[4], "{0:<.2f}".format(prices[3]), "{0:<.2f}".format(int(currorder[4])*prices[3])])
+		format_order.append(['A5 note book with zip bag', currorder[4], "{0:<.2f}".format(prices[3]), "{0:<.2f}".format(int(currorder[4])*4.6)])
 	if currorder[5]>0:
-		format_order.append(['2B pencil', currorder[5], "{0:<.2f}".format(prices[4]), "{0:<.2f}".format(int(currorder[5])*prices[4])])
+		format_order.append(['2B pencil', currorder[5], "{0:<.2f}".format(prices[4]), "{0:<.2f}".format(int(currorder[5])*0.9)])
 	if currorder[6]>0:
-		format_order.append(['Stainless steel tumbler', currorder[6], "{0:<.2f}".format(prices[5]), "{0:<.2f}".format(int(currorder[6])*prices[5])])
+		format_order.append(['Stainless steel tumbler', currorder[6], "{0:<.2f}".format(prices[5]), "{0:<.2f}".format(int(currorder[6])*12.9)])
 	if currorder[7]>0:
-		format_order.append(['A4 clear holder', currorder[7], "{0:<.2f}".format(prices[6]), "{0:<.2f}".format(int(currorder[7])*prices[8])])
+		format_order.append(['A4 clear holder', currorder[7], "{0:<.2f}".format(prices[6]), "{0:<.2f}".format(int(currorder[7])*4.4)])
 	if currorder[8]>0:
-		format_order.append(['A4 vanguard file', currorder[8], "{0:<.2f}".format(prices[7]), "{0:<.2f}".format(int(currorder[8])*prices[7])])
+		format_order.append(['A4 vanguard file', currorder[8], "{0:<.2f}".format(prices[7]), "{0:<.2f}".format(int(currorder[8])*1.0)])
 	if currorder[9]>0:
-		format_order.append(['Name card holder', currorder[9], "{0:<.2f}".format(prices[8]), "{0:<.2f}".format(int(currorder[9])*prices[8])])
+		format_order.append(['Name card holder', currorder[9], "{0:<.2f}".format(prices[8]), "{0:<.2f}".format(int(currorder[9])*10.9)])
 	if currorder[10]>0:
-		format_order.append(['Umbrella', currorder[10], "{0:<.2f}".format(prices[9]), "{0:<.2f}".format(int(currorder[10])*prices[9])])
+		format_order.append(['Umbrella', currorder[10], "{0:<.2f}".format(prices[9]), "{0:<.2f}".format(int(currorder[10])*9.0)])
 	if currorder[11]>0:
-		format_order.append(['School badge (Junior High)', currorder[11], "{0:<.2f}".format(prices[10]), "{0:<.2f}".format(int(currorder[11])*prices[10])])
+		format_order.append(['School badge (Junior High)', currorder[11], "{0:<.2f}".format(prices[10]), "{0:<.2f}".format(int(currorder[11])*1.3)])
 	if currorder[12]>0:
-		format_order.append(['School badge (Senior High)', currorder[12], "{0:<.2f}".format(prices[11]), "{0:<.2f}".format(int(currorder[12])*prices[11])])
+		format_order.append(['School badge (Senior High)', currorder[12], "{0:<.2f}".format(prices[11]), "{0:<.2f}".format(int(currorder[12])*1.8)])
 	if currorder[13]>0:
-		format_order.append(['Dunman dolls (pair)', currorder[13], "{0:<.2f}".format(prices[12]), "{0:<.2f}".format(int(currorder[13])*prices[12])])
+		format_order.append(['Dunman dolls (pair)', currorder[13], "{0:<.2f}".format(prices[12]), "{0:<.2f}".format(int(currorder[13])*45.0)])
 	totalcost = 0
 	for row in format_order:
 		try:

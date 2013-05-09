@@ -7,10 +7,9 @@ foo = "dummy"
 
 with con:
 	cur = con.cursor()
-	#cur.execute("DROP TABLE IF EXISTS prices")
-	#cur.execute("CREATE TABLE prices (price float)")
-	cur.execute("DROP TABLE IF EXISTS users")
-	cur.execute("CREATE TABLE users(username text, password text, email text)")
+	cur.execute("DROP TABLE IF EXISTS prices")
+	#cur.execute("DROP TABLE IF EXISTS users")
+	#cur.execute("CREATE TABLE users(username text, password text, email text)")
 	#cur.execute("INSERT INTO users VALUES ('admin', 'admin', 'leow.justin@dhs.sg')")
 	#cur.execute("INSERT INTO users VALUES ('Aussiroth', 'WhiteDragon', 'yan.hongyao.alvin@dhs.sg')")
 	#cur.execute("DROP TABLE IF EXISTS orders")
